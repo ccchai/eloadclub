@@ -1,0 +1,24 @@
+﻿<div id="content">
+    <div class="data-list">
+        <div ng-click="onClick(model)" class="list-item" ng-repeat="model in list">
+            <p ng-bind="model.User"></p>
+            <small ng-bind="model.DealerId"></small>
+            <span ng-bind="model.Memo"></span>
+            <em ng-bind="model.LastModified | date: 'd-M-yyyy h:mm a'"></em>
+            <div ng-bind="model.NewItem" ng-show="model.NewItem > 0" style="font-size: 16px"></div>
+        </div>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+ <div id="ddmenu">
+     
+     <button ng-click="fetchData()">
+         <i class="icon-refresh"></i>
+         <span ng-bind="lang.REFRESH"></span>
+     </button>
+</div> 
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>

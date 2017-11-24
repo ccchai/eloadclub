@@ -1,0 +1,85 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <th>
+                    <label ng-bind="lang.USER_ID"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.Code | tel"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.USER_NAME"></label>
+
+                </th>
+                <td>
+                    <b ng-bind="current.UserName"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Name" ng-bind="lang.ACCOUNT_NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="Name" name="Name" ng-model="current.Name" maxlength="100" required autocomplete="off" />
+
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Password" ng-bind="lang.PASSWORD"></label>
+                </th>
+                <td>
+                    <input id="Password" type="password" name="Password" ng-model="current.Password" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="RebatePlan" ng-bind="lang.REBATE_PLAN"></label>
+                </th>
+                <td>
+                    <select id="RebatePlan" name="RebatePlan" ng-model="current.RebatePlan" required ng-options="o.Id as o.Name for o in plans"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label ng-bind="lang.BALANCE"></label>
+                </th>
+                <td>
+                    <b ng-bind="'RM ' + (current.Balance | number: 2)"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label ng-bind="lang.LAST_LOGIN"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.LastLoginDate | date: 'd-M-yyyy h:mm a'"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>                     
+                    <label ng-bind="lang.CREATED_ON"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.CreatedOn | date: 'd-M-yyyy h:mm a'"></b>
+                </td>
+            </tr>
+            <tr>                 
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+ 
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

@@ -1,0 +1,166 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+
+            <tr>
+                <th>
+                    <label>Order ID</label>
+                </th>
+                <td>
+                    <b ng-bind="current.Id"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Dealer</label>
+                </th>
+                <td>
+                    <b ng-bind="current.Dealer"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Status</label>
+                </th>
+                <td>
+                    <b ng-bind="current.Status"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Phone</label>
+                </th>
+                <td>
+                    <b ng-bind="current.Name | tel"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Negotiable</label>
+                </th>
+                <td>
+                    <b ng-bind="current.IsNegotiable"></b>
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    <label>Original Price</label>
+                </th>
+                <td>
+                    <b ng-bind="current.OriginalPrice | number: 2"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Offer Price</label>
+                </th>
+                <td>
+                    <b ng-bind="current.OfferPrice | number: 2"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Deducted Price</label>
+                </th>
+                <td>
+                    <b ng-bind="current.DeductedPrice | number: 2"></b>
+                </td>
+            </tr>  
+
+
+
+            <tr>
+                <th colspan="2">
+                    <label>Photo</label>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img ng-src="{{current.Photo}}" ng-click="showPhoto()" style="width: 100%; max-width: 380px" ng-show="current.Photo" />
+                </td>
+            </tr>   
+
+            <tr>
+                <th colspan="2">
+                    <label>Signature</label>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <canvas id="sign-pad" style="width: 100%; max-width: 380px; height: 180px; border: 2px solid #e0e0e0; background: #fff"></canvas> 
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    <label>Whatsapp Text</label>
+                </th>
+                <td>
+                    <textarea id="WhatsappText" name="WhatsappText" ng-model="current.WhatsappText"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Final Price</label>
+                </th>
+                <td>
+                    <input id="FinalPrice" name="FinalPrice" ng-model="current.FinalPrice" type="number" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label>Action Type</label>
+                </th>
+                <td>
+                    <select id="ActionType" name="ActionType" ng-model="current.ActionType">
+                        <option value="None">None</option>
+                        <option value="Cancelled">Cancel - Cancel Order</option>
+                        <option value="Rejected">Reject - Number is no longer available</option>
+                        <option value="Proceeding">Proceed - Number is available</option>
+                        <option value="Negotiating">Negotiate - Update pricing</option>
+                        <option value="Requesting">Request - Info is not complete</option>
+                        <option value="Refunded">Refund - Transfer ownership failed</option>
+                        <option value="Completed">Complete - Simcard is mailed out</option>
+                        <option value="Closed">Close - money is transferred</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr ng-show="current.ActionType == 'Requesting'">
+                <th>
+                    <label>Request Info</label>
+                </th>
+                <td>
+                    <textarea id="RequestInfo" name="RequestInfo" ng-model="current.RequestInfo"></textarea>
+                </td>
+            </tr> 
+
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<detail-pane visible='paneShown'>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px" id="currentPhoto" />
+</detail-pane>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

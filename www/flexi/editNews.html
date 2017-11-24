@@ -1,0 +1,145 @@
+﻿<div id="menu">
+    <button ng-click="step = 'EN'" ng-class="{'active': step == 'EN'}" ng-bind="lang.ENGLISH"></button>
+    <button ng-click="step = 'MY'" ng-class="{'active': step == 'MY'}" ng-bind="lang.MALAY"></button>
+    <button ng-click="step = 'CN'" ng-class="{'active': step == 'CN'}" ng-bind="lang.CHINESE"></button>
+</div>
+
+
+<div id="content" class="level-1">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-vertical">
+            <tbody>
+                <tr>
+                    <th style="width: 100px">
+                        <label for="Active" ng-bind="lang.STATUS"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="Active" name="Active" type="checkbox" ng-model="current.Active" />
+                        <label for="Active" style="margin: 0"></label>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="step == 'EN'">
+                <tr>
+                    <th>
+                        <label for="Name" ng-bind="lang.SUBJECT"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="Name" name="Name" ng-model="current.Name" required maxlength="100" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Memo" ng-bind="lang.MEMO"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea id="Memo" name="Memo" ng-model="current.Memo" maxlength="1000"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="step == 'MY'">
+                <tr>
+                    <th>
+                        <label for="NameMY" ng-bind="lang.SUBJECT"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="NameMY" name="NameMY" ng-model="current.NameMY" maxlength="100" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="MemoMY" ng-bind="lang.MEMO"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea id="MemoMY" name="MemoMY" ng-model="current.MemoMY" maxlength="1000"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="step == 'CN'">
+                <tr>
+                    <th>
+                        <label for="NameCN" ng-bind="lang.SUBJECT"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="NameCN" name="NameCN" ng-model="current.NameCN" maxlength="100" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="MemoCN" ng-bind="lang.MEMO"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea id="MemoCN" name="MemoCN" ng-model="current.MemoCN" maxlength="1000"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="editMode">
+                <tr>
+                    <th>
+                        <label ng-bind="lang.CREATED_BY"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <b ng-bind="current.CreatedBy | tel"></b>
+                        /
+                        <b ng-bind="current.CreatedOn | date: 'd-M-yyyy h:mm a'"></b>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label ng-bind="lang.LAST_EDITED_BY"></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <b ng-bind="current.LastEditedBy | tel"></b>
+                        /
+                        <b ng-bind="current.LastModified | date: 'd-M-yyyy h:mm a'"></b>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div> 
+
+
+<div id="ddmenu">
+    <button ng-click="broadcast()" ng-disabled="isDisabled">
+        <i class="icon-megaphone-1"></i>
+        <span ng-bind="lang.BROADCAST"></span>
+    </button>
+    <button ng-click="delete()">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button>
+    <!--<button class="icon-satellite" ng-click="broadcastGame()" title="GAMES" ng-disabled="isDisabled"></button>-->
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

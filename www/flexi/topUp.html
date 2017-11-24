@@ -1,0 +1,206 @@
+﻿<div id="content">
+    <div ng-show="mode == 1">
+        <table class="tbl-title">
+            <tr>
+                <td style="padding: 10px">
+                    <h2 ng-bind="lang.SELECT_PRODUCT"></h2>
+                </td>
+            </tr>
+        </table>
+
+        <div class="search-huge">
+            <input type="text" ng-model='searchText' autocomplete="off" />
+            <span class="icon-ios-search-strong"></span>
+            <i ng-bind="filtered.length"></i>
+        </div>
+
+        <a href="" class="link" ng-bind="lang.LAST_TRX" ng-click="useLastTrx()" ng-show="hasLastTrx" style="line-height: 30px; margin: 10px 0; display: block; text-align: center; font-weight: 600; font-size: 18px">
+
+        </a>
+
+
+        <div class="data-list" ng-show="!dragMode">
+            <div class="list-item" ng-repeat="model in filtered = (products | filter:searchText)" ng-click="tapProduct(model)" style="cursor: pointer">
+                <p class="big" ng-bind="model.name"></p>
+                <img ng-src="{{model.icon}}" />
+            </div>
+        </div>
+
+        <div class="data-list" slip-list ng-show="dragMode"         
+             slip-reorder="reorder($event, $spliceIndex, $originalIndex)"
+             slip-before-swipe="preventSwipe($event, $index)"
+             slip-before-wait="beforeWait($event, $index)">
+            <div class="list-item" ng-repeat="model in filtered = (products | filter:searchText)" ng-click="tapProduct(model)" style="cursor: pointer">
+                <p class="big" ng-bind="model.name"></p>
+                <img ng-src="{{model.icon}}" />
+                <i class="icon-swipe-vertical rotate"></i>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <div ng-show="mode == 2">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goTo(1)"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.ENTER_AMOUNT"></h2>
+                </td>
+            </tr>
+        </table>
+        <form ng-show="selectedProduct.otherAmount" novalidate style="max-width: none">
+            <div class="search-huge">
+                <input type="number" ng-model='amount' format-decimal min="1" max="99999" id="airtime" autocomplete="off" />
+                <span class="icon-hand-coin"></span>
+                <button ng-click="onClickAmount(amount, null)" tabindex="-1" class="icon-android-arrow-forward" type="submit"></button>
+            </div>
+        </form>
+        <div class="data-list">
+            <div class="list-item" ng-repeat="model in amounts" ng-click="onClickAmount(model.amt, model.name)">
+                <p class="big" ng-bind="model.name + 'RM ' + model.amt"></p>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 3">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goTo(2)"></button>
+                </th>
+                <td>
+                    <h2>
+                        {{lang.ENTER_PHONE}}  <span ng-show="!selectedProduct.hasAccountNo"> {{selectedProduct.sample}}</span>
+                    </h2>
+                </td>
+            </tr>
+        </table>
+        <form style="max-width: none">
+            <div class="search-huge">
+                <input type="tel" ng-model='selectedPhone' ng-change="find()" ui-mask="{{selectedProduct.mask}}" id="phone" autocomplete="off" />
+                <span class="icon-call-1"></span>
+                <button ng-click="onEnterPhone()" tabindex="-1" class="icon-android-arrow-forward"></button>
+            </div>
+        </form>
+        <div class="data-list" slip-list
+             slip-before-reorder="preventReorder($event, $index)"
+             slip-after-swipe="afterPhoneSwipe($event, $index)">
+            <div class="list-item" ng-repeat="model in phoneList" ng-click="onClickPhone(model)">
+                <p class="big" ng-bind="model.Id | tel"></p>
+                <div class="icon-android-arrow-forward"></div>
+                <i class="icon-swipe-horizontal"></i>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 4">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goTo(3)"></button>
+                </th>
+                <td>
+                    <h2>{{lang.ENTER_ACCOUNT_NO}} <span ng-show="selectedProduct.hasAccountNo"> {{selectedProduct.sample}}</span></h2>
+                </td>
+            </tr>
+        </table>
+        <form style="max-width: none">
+            <div class="search-huge">
+                <input type="tel" ng-model='selectedAccount' id="account" autocomplete="off" />
+                <span class="icon-receipt-3"></span>
+                <button ng-click="onEnterAccountNo()" tabindex="-1" class="icon-android-arrow-forward"></button>
+            </div>
+        </form>
+        <div class="data-list" slip-list
+             slip-before-reorder="preventReorder($event, $index)"
+             slip-after-swipe="afterAccountSwipe($event, $index)">
+            <div class="list-item" ng-repeat="model in accountList" ng-click="onClickAccount(model)">
+                <p class="big" ng-bind="model.Name"></p>
+                <div class="icon-android-arrow-forward"></div>
+                <i class="icon-swipe-horizontal"></i>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 5">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goBack()"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.CONFIRM"></h2>
+                </td>
+            </tr>
+        </table>
+
+        <div class="confirm-div">
+            <img ng-src="{{selectedProduct.icon}}" />
+            <p ng-bind="selectedProduct.name"></p>
+            <p ng-bind="selectedPhone | tel"></p>
+            <p ng-show="selectedAccount" ng-bind="selectedAccount"></p>
+            <p>{{selectedAmountName}} RM {{selectedAmount | number: 2}}</p>
+            <!--<p style="font-size: 24px; margin: 0 0 6px 0; font-weight: 600">{{lang.TO_PAY}}: RM {{toPay() | number: 2}}</p>-->
+            <button class="btn btn-all" id="confirm" ng-click="confirm()" ng-bind="lang.CONFIRM"></button>
+        </div>
+    </div>
+   
+
+    <div ng-show="mode == 6" class="sending-div">
+        <table class="tbl-title" ng-show="showPin">
+            <tr>
+                <th style="padding-left: 0">
+                    <button class="icon-android-arrow-back  back-btn" ng-click="goTo(5)" style="margin: 0; width: 36px"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.PASSWORD" style="text-align: left"></h2>
+                </td>
+            </tr>
+        </table>
+        <form ng-show="showPin" style="max-width: none">
+            <div class="search-huge" style="margin: 10px 0">
+                <input type="password" ng-model='pin' id="pin" autocomplete="off" />
+                <span class="icon-key-2"></span>
+                <button ng-click="submitPin()" tabindex="-1" ng-disabled="!pin" class="icon-android-arrow-forward" ></button>
+            </div>
+        </form>
+        <div ng-show="!showPin">
+            <div class="sending" ng-show="isDisabled" style="margin-top: 110px"></div>
+            <i ng-show="!isDisabled" ng-class="statusIcon" style="margin-top: 80px"></i>
+            <p ng-bind="status" ng-style="{ 'color': statusColor}"></p>
+            <button class="btn btn-all" id="back" ng-show="!isDisabled" ng-click="cancel()" ng-bind="lang.START_PAGE"></button>
+
+            <div style="text-align: center; padding: 40px 0 0 0" ng-show="!isDisabled">
+                <a href="#/status" class="link" style="font-size: 16px">{{lang.STATUS}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ddmenu">
+    <button ng-click="editProductList()" ng-disabled="!canShowReset()">
+        <i class="icon-swipe-vertical"></i>
+        <span ng-bind="lang.DRAG" ng-show="!dragMode"></span>
+        <span ng-bind="lang.FINISH" ng-show="dragMode"></span>
+    </button> 
+
+    <button ng-click="reset()" ng-disabled="!canShowReset()">
+        <i class="icon-sync-2"></i>
+        <span ng-bind="lang.RESET"></span>
+    </button> 
+    <button ng-click="print()" ng-show="mode == 6">
+        <i class="icon-printer"></i>
+        <span ng-bind="lang.PRINT"></span>
+    </button>
+</div>
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

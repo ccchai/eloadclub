@@ -1,0 +1,141 @@
+﻿<div id="menu">
+    <button ng-click="goTo(1)" ng-class="{'active': step == 1}" ng-bind="lang.REBATE"></button>
+    <button ng-click="goTo(2)" ng-class="{'active': step == 2}" ng-bind="lang.BANK"></button> 
+</div>
+
+
+<div id="content" class="level-1">
+    <table class="data" ng-show="step == 1">
+        <tr>
+            <td ng-bind="lang.NAME"></td>
+            <td ng-bind="current.Name" style="text-align: right"></td>
+        </tr>
+        <tr>
+            <td ng-bind="lang.REBATE_PLAN"></td>
+            <td ng-bind="current.RebatePlan" style="text-align: right"></td>
+        </tr>
+        <tr>
+
+            <td ng-bind="lang.CREATED_ON"></td>
+            <td ng-bind="current.CreatedOn | date: 'd-M-yyyy h:mm a'" style="text-align: right"></td>
+        </tr>
+        <tr ng-repeat="r in current.Rebates">
+
+            <td ng-bind="r.Name"></td>
+            <td ng-bind="r.Rebate" style="text-align: right;"></td>
+        </tr>
+    </table>
+
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal" ng-show="step == 2">
+            <tr>
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.LET_DOWNLINE_BANK_TO"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2 ng-bind="lang.BANK + ' 1'" style="margin: 0"></h2>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Bank1" ng-bind="lang.BANK"></label>
+                </th>
+                <td>
+                    <input type="text" id="Bank1" name="Bank1" ng-model="current.Bank1" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountNo1" ng-bind="lang.ACCOUNT_NO"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountNo1" name="AccountNo1" ng-model="current.AccountNo1" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountName1" ng-bind="lang.ACCOUNT_NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountName1" name="AccountName1" ng-model="current.AccountName1" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2 ng-bind="lang.BANK + ' 2'" style="margin: 0"></h2>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Bank2" ng-bind="lang.BANK"></label>
+                </th>
+                <td>
+                    <input type="text" id="Bank2" name="Bank2" ng-model="current.Bank2" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountNo2" ng-bind="lang.ACCOUNT_NO"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountNo2" name="AccountNo2" ng-model="current.AccountNo2" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountName2" ng-bind="lang.ACCOUNT_NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountName2" name="AccountName2" ng-model="current.AccountName2" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2 ng-bind="lang.BANK + ' 3'" style="margin: 0"></h2>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Bank3" ng-bind="lang.BANK"></label>
+                </th>
+                <td>
+                    <input type="text" id="Bank3" name="Bank3" ng-model="current.Bank3" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountNo3" ng-bind="lang.ACCOUNT_NO"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountNo3" name="AccountNo3" ng-model="current.AccountNo3" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="AccountName3" ng-bind="lang.ACCOUNT_NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="AccountName3" name="AccountName3" ng-model="current.AccountName3" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

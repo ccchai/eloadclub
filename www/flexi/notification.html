@@ -1,0 +1,59 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-vertical min-height-td">
+            <tr style="border-bottom: none">
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.NOTIFICATION_NOTE"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20px">
+                    <input id="FailOrder" name="FailOrder" type="checkbox" ng-model="current.FailOrder" />
+                    <label for="FailOrder"></label>
+                </td>
+                <td>
+                    <label class="caption" for="FailOrder" ng-bind="lang.FAILED_ORDER"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="TransferRequest" name="TransferRequest" type="checkbox" ng-model="current.TransferRequest" />
+                    <label for="TransferRequest"></label>
+                </td>
+                <td>
+                    <label class="caption" for="TransferRequest" ng-bind="lang.TRANSFER_REQEUST"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="BalanceIncrease" name="BalanceIncrease" type="checkbox" ng-model="current.BalanceIncrease" />
+                    <label for="BalanceIncrease"></label>
+                </td>
+                <td>
+                    <label class="caption" for="BalanceIncrease" ng-bind="lang.BALANCE_INCREASED"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="News" name="News" type="checkbox" ng-model="current.News" />
+                    <label for="News"></label>
+                </td>
+                <td>
+                    <label class="caption" for="News" ng-bind="lang.ANNOUNCEMENT"></label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>

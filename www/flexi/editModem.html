@@ -1,0 +1,157 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <th>
+                    <label for="Active" ng-bind="lang.STATUS"></label>
+                </th>
+                <td>
+                    <input ng-model="current.Active" name="Active" id="Active" type="checkbox" />
+                    <label for="Active" style="margin: 0"></label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Product" ng-bind="lang.PRODUCT"></label>
+                </th>
+                <td>
+                    <select id="Product" name="Product" ng-model="current.Product">
+                        <option value="None">-- None --</option>
+                        <option value="TopUp68">TopUp68</option>
+                        <option value="M365">M365</option>
+                        <option value="Celcom">Celcom</option>
+                        <option value="Digi">Digi</option>
+                        <option value="TuneTalk">TuneTalk</option>
+                        <option value="Valyou">Valyou</option>
+                        <option value="Hotlink">Hotlink</option>
+                        <option value="Umobile">Umobile</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Name" ng-bind="lang.NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="Name" name="Name" ng-model="current.Name" maxlength="100" required autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Channel" ng-bind="lang.CHANNEL"></label>
+                </th>
+                <td>
+                    <input type="text" id="Channel" name="Channel" ng-model="current.Channel" maxlength="1" required autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Code" ng-bind="lang.USER_ID"></label>
+                </th>
+                <td>
+                    <input type="text" id="Code" name="Code" ng-model="current.Code" maxlength="20" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="WebPassword" ng-bind="lang.WEB_PASSWORD"></label>
+                </th>
+                <td>
+                    <input type="text" id="WebPassword" name="WebPassword" ng-model="current.WebPassword" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="SmsPin" ng-bind="lang.SMS_PIN"></label>
+                </th>
+                <td>
+                    <input type="text" id="SmsPin" name="SmsPin" ng-model="current.SmsPin" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="url" ng-bind="lang.URL"></label>
+                </th>
+                <td>
+                    <input type="url" id="url" name="Url" ng-model="current.Url" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Mode" ng-bind="lang.MODE"></label>
+                </th>
+                <td>
+                    <select id="Mode" name="Mode" ng-model="current.Mode">
+                        <option value="Web">Web</option>
+                        <option value="GSM">GSM</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Port" ng-bind="lang.PORT"></label>
+                </th>
+                <td>
+                    <select id="Port" name="Port" ng-model="current.Port" ng-options="o.id as o.name for o in ports"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="BaudRate" ng-bind="lang.BAUD_RATE"></label>
+                </th>
+                <td>
+                    <select id="BaudRate" name="BaudRate" ng-model=" current.baudrate">
+                        <option value="None">-- None --</option>
+                        <option value="BR_110">110</option>
+                        <option value="BR_115200"> 115200</option>
+                        <option value="BR_1200">1200</option>
+                        <option value="BR_14400">14400</option>
+                        <option value="BR_19200">19200</option>
+                        <option value="BR_230400">230400</option>
+                        <option value="BR_2400">2400</option>
+                        <option value="BR_300">300</option>
+                        <option value="BR_38400">38400</option>
+                        <option value="BR_460800">460800</option>
+                        <option value="BR_4800">4800</option>
+                        <option value="BR_57600">57600</option>
+                        <option value="BR_921600">921600</option>
+                        <option value="BR_9600">9600</option>
+                    </select>
+                </td>
+            </tr>
+            <tr ng-show="editMode">
+                <th>
+                    <label ng-bind="lang.BALANCE"></label>
+                </th>
+                <td>
+                    <b ng-bind="'RM ' + (current.Balance | number: 2)"></b>
+                </td>
+            </tr>
+            <tr ng-show="editMode">
+                <th>
+                    <label ng-bind="lang.LAST_UPDATED"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.BalanceLastUpdated | date: 'd-M-yyyy h:mm a'"></b>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="ddmenu">
+    <button ng-click="delete()">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

@@ -1,0 +1,31 @@
+﻿<div id="content">   
+        <table class="data">
+            <tr ng-show="editMode">
+                <td colspan="2" style="padding: 10px;"> 
+                    <div class="warning">
+                        <small class="icon-alert-circled"></small>
+                        <span ng-bind="lang.REDUCE_REBATE_RATE_NOTE"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td ng-bind="lang.NAME"></td>
+                <td ng-bind="current.Name" style="text-align: right;"></td>
+            </tr>             
+            <tr ng-repeat="model in current.Details">
+                <td>
+                    <span ng-bind="model.Product"></span>
+                    <span ng-bind="model.RebateType"></span>  
+                </td>
+                <td ng-bind="model.Rebate | number:3" style="text-align: right;">
+                    <!--//model.MaxValue-->
+                </td>
+            </tr>             
+        </table>    
+</div>
+ 
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

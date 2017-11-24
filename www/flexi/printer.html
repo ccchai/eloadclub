@@ -1,0 +1,83 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.PRINTER_PAGE_TITLE"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Printer" ng-bind="lang.PRINTER_ONLY"></label>
+                </th>
+                <td>
+                    <select id="Printer" name="Printer" ng-model="current.Printer" ng-options="o.id as o.name for o in printers"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="CompanyName" ng-bind="lang.COMPANY"></label>
+                </th>
+                <td>
+                    <input type="text" id="CompanyName" name="CompanyName" ng-model="current.CompanyName" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Phone" ng-bind="lang.PHONE"></label>
+                </th>
+                <td>
+                    <input type="tel" id="Phone" name="Phone" ng-model="current.Phone" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Address" ng-bind="lang.ADDRESS"></label>
+                </th>
+                <td>
+                    <input type="text" id="Address" name="Address" ng-model="current.Address" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Footer1" ng-bind="lang.FOOTER + ' 1'"></label>
+                </th>
+                <td>
+                    <input type="text" id="Footer1" name="Footer1" ng-model="current.Footer1" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Footer2" ng-bind="lang.FOOTER + ' 2'"></label>
+                </th>
+                <td>
+                    <input type="text" id="Footer2" name="Footer2" ng-model="current.Footer2" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="ddmenu">
+    <button ng-click="print()">
+        <i class="icon-printer"></i>
+        <span ng-bind="lang.PRINT"></span>
+    </button>
+    <button ng-click="listDevice()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.FIND_PRINTER"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

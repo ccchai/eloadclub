@@ -1,0 +1,320 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+
+            <tr ng-show="current.DeductedPrice == 0">
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.SUBMIT_INFO_WARNING"></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.ORDER_ID"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.Id"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.STATUS"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.Status"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.PHONE"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.Name | tel"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.AMOUNT"></label>
+                </th>
+                <td>
+                    <b ng-bind="'RM ' + (current.FinalPrice | number: 2)"></b>
+                </td>
+            </tr>
+
+            <tr>
+
+                <td colspan="2">
+                    <b ng-bind="lang.CUSTOMER_INFO"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.TITLE"></label>
+                </th>
+                <td>
+                    <select id="Title" name="Title" ng-model="current.Title">
+                        <option value=""></option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="En">En</option>
+                        <option value="Cik">Cik</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.FULLNAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="FullName" name="FullName" ng-model="current.FullName" maxlength="100" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.ICNO"></label>
+                </th>
+                <td>
+                    <input type="text" id="IcNo" name="IcNo" ng-model="current.IcNo" maxlength="20" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.NATIONALITY"></label>
+                </th>
+                <td>
+                    <input type="text" id="Nationality" name="Nationality" ng-model="current.Nationality" maxlength="50" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.BIRTHDATE"></label>
+                </th>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="padding: 0 10px 0 0; width: 33%">
+                                <select id="Day" ng-model="current.Day">
+                                    <option value=""></option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </td>
+
+                            <td style="padding: 0 10px 0 0; width: 33%">
+                                <select id="Month" ng-model="current.Month">
+                                    <option value=""></option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </td>
+
+                            <td style="padding: 0 0 0 0; width: 33%">
+                                <input type="number" id="Year" name="Year" ng-model="current.Year" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.GENDER"></label>
+                </th>
+                <td>
+                    <select id="Gender" name="Gender" ng-model="current.Gender">
+                        <option value=""></option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.RACE"></label>
+                </th>
+                <td>
+                    <select id="Race" name="Race" ng-model="current.Race">
+                        <option value=""></option>
+                        <option value="Malay">Malay</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.PREFERRED_LANGUAGE"></label>
+                </th>
+                <td>
+                    <select id="Language" name="Language" ng-model="current.Language">
+                        <option value=""></option>
+                        <option value="Bahasa Malaysia">Bahasa Malaysia</option>
+                        <option value="English">English</option>
+                        <option value="Chinese">Chinese</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.CONTACTNO"></label>
+                </th>
+                <td>
+                    <input type="text" id="ContactNo" name="ContactNo" ng-model="current.ContactNo" ui-mask="999-999-9999?9" maxlength="20" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.MAILINGADDRESS"></label>
+                </th>
+                <td>
+                    <textarea id="MailingAddress" name="MailingAddress" ng-model="current.MailingAddress" maxlength="100"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.POSTCODE"></label>
+                </th>
+                <td>
+                    <input type="text" id="Postcode" name="Postcode" ng-model="current.Postcode" maxlength="10" />
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.STATE"></label>
+                </th>
+                <td>
+                    <input type="text" id="State" name="State" ng-model="current.State" maxlength="50" />
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <th colspan="2">
+                    <label for="Photo" ng-bind="lang.ID_PHOTO"></label>
+                </th>
+            </tr>
+            <tr ng-sho1w="!isPhoneGap">
+                <td colspan="2">
+                    <input type="file" id="Photo" fileread="current.Photo" accept="image/*" autocomplete="off" />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div  style="margin: 10px 10px 10px 10px; display: block; text-align: center; font-weight: 600;">
+                        <b ng-bind="lang.PHOTO" ng-show="!current.Photo"></b>
+                        <div style="margin: 10px 0 30px 0" ng-show="isPhoneGap">
+                            <a href="" ng-bind="lang.TAKE_PHOTO" ng-click="takePhoto()"></a> / <a href="" ng-bind="lang.PICK_PHOTO" ng-click="pickPhoto()"></a>
+                        </div>
+                    </div>
+
+                    <img ng-src="{{current.Photo}}" ng-click="showPhoto()" style="width: 100%; max-width: 380px" ng-show="current.Photo" />
+                </td>
+            </tr> 
+
+
+            <tr>
+                <th colspan="2">
+                    <label ng-bind="lang.SIGNATURE"></label>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <canvas id="sign-pad" style="width: 100%; max-width: 380px; height: 180px; border: 2px solid #e0e0e0; background: #fff"></canvas>
+                    <button style="background: #4fd2c2; padding: 5px 20px" type="button" ng-click="onClear()">Reset</button>
+                </td>
+            </tr>
+
+
+            <tr>
+
+                <td colspan="2">
+                    <b ng-bind="lang.DELIVERY_INFO"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.DELIVERYADDRESS"></label>
+                </th>
+                <td>
+                    <textarea id="DeliveryAddress" name="DeliveryAddress" ng-model="current.DeliveryAddress" maxlength="500"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<detail-pane visible='paneShown'>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px" id="currentPhoto" />
+</detail-pane>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

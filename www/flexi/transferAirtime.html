@@ -1,0 +1,138 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <td colspan="2">
+                    <div class="warning">
+                        <i class="icon-alert-circled"></i>
+                        <span ng-bind="lang.TRANSFER_INFO"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Amount" ng-bind="lang.AMOUNT"></label>
+                </th>
+                <td>
+                    <input type="number" id="Amount" name="Amount" ng-model="current.Amount" required autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="FromDealer" ng-bind="lang.DEALER"></label>
+                </th>
+                <td>
+                    <select name="FromDealer" id="FromDealer" ng-change="updatePhone()" ng-model="current.FromDealer" required ng-options="o.Id as o.Name for o in members"></select>
+                </td>
+            </tr>
+            <tr ng-show="phone">
+                <th>
+                    <label ng-bind="lang.PHONE"></label>
+                </th>
+                <td>
+                    <b ng-bind="phone | tel"></b>
+                </td>
+            </tr>
+            <tr ng-show="current.Bank">
+                <th>
+                    <label ng-bind="lang.BANK"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.Bank"></b>
+                </td>
+            </tr>
+            <tr ng-show="current.BankInDate">
+                <th>
+                    <label for="BankInDate" ng-bind="lang.BANK_IN_DATE"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.BankInDate | date: 'd-M-yyyy h:mm a'"></b>
+
+                </td>
+            </tr>
+            <tr ng-show="current.BankInDate">
+                <th>
+                    <label ng-bind="lang.PHOTOS"></label>
+                </th>
+                <td>
+                    <b ng-show="!current.Photo" ng-bind="lang.PHOTO"></b>
+                    <img ng-src="{{current.Photo}}" ng-click="showPhoto()" style="width: 100%" ng-show="current.Photo" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+<detail-pane visible='paneShown'>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px" id="currentPhoto" ng-show="step == 1" />
+
+    <form name="myForm2" ng-submit="submitForm2(myForm2)" novalidate ng-show="step == -1">
+        <table class="form-table-vertical">
+            <tr>
+                <td>
+                    <div class="warning">
+                        <small class="icon-help-circled"></small>
+                        <span ng-bind="lang.CONFIRM_CANCEL"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Remark" ng-bind="lang.REMARK"></label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="Remark" name="Remark" ng-model="ccl.Remark" maxlength="100" required autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn btn-all" ng-disabled="!myForm2.$valid || isDisabled" ng-bind="lang.CANCEL"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</detail-pane>
+
+
+
+
+
+<div id="ddmenu">
+    <button ng-click="cancel()">
+        <i class="icon-close"></i>
+        <span ng-bind="lang.CANCEL"></span>
+    </button>
+    <button ng-click="delete()">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button>
+</div>
+
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+
+
+
+<!--<div id="lightbox" ng-show="showLightbox">
+    <div>
+        <img ng-src="{{current.Photo}}" />
+    </div>
+</div>
+
+<div id="overlay" ng-show="showLightbox">
+    <a href="" class="close icon-cross" ng-click="showLightbox = false"></a>
+</div>-->

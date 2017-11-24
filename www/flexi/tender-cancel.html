@@ -1,0 +1,53 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-vertical">
+
+            <tr>
+                <th>
+                    <label ng-bind="lang.PHONE"></label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <b ng-bind="current.Name | tel"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label ng-bind="getPriceType(current)"></label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <b ng-bind="'RM ' + (current.OriginalPrice | number: 2)"></b>
+                </td>
+            </tr>
+
+            <tr ng-show="current.IsNegotiable">
+                <th>
+                    <label for="OfferPrice" ng-bind="lang.OFFER_A_PRICE"></label>
+                </th>
+            </tr>
+            <tr ng-show="current.IsNegotiable">
+                <td>
+                    <b ng-bind="'RM ' + (current.OfferPrice | number: 2)"></b>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.CANCEL_BOOKING"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

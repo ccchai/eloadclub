@@ -1,0 +1,65 @@
+﻿<div id="content">
+    <div class="chat-body">
+        <div style="padding: 10px">
+            <a href="" style="text-transform: uppercase; text-align: center; font-weight: 600; display: block; margin: 0 auto" ng-click="loadMore()" ng-show="canLoadMore" ng-bind="lang.MORE"></a>
+        </div>
+
+        <div ng-repeat="model in list">
+            <div ng-class="{'chat-div-support': model.DealerId == 1, 'chat-div-member': model.DealerId != 1}">
+                <p><img class="chat-img" ng-src="{{model.Photo}}" ng-if="model.Photo" ng-click="showPhoto(model.Photo)" /><span ng-bind="model.Memo"></span><b ng-if="model.CancelId || model.ProceedId"><a ng-href="{{'#/tender-cancel/' + model.CancelId}}" ng-if="model.CancelId" ng-bind="lang.CANCEL_BOOKING"></a><a ng-href="{{'#/tender-info/' + model.ProceedId}}" ng-if="model.ProceedId" ng-bind="lang.SUBMIT_INFO"></a></b></p> 
+                <small ng-bind="model.CreatedOn | date: 'd-M-yyyy h:mm a'"></small>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+        <div class="push"></div>
+    </div>
+    <div class="chat-box">
+        <table>
+            <tr>
+                <td>
+                    <button ng-click="pick()" ng-show="isPhoneGap && !photo" ng-disabled="isDisabled" class="icon-camera-front pick-btn"></button>
+
+
+                    <div ng-show="!isPhoneGap && !photo">
+                        <label for="upload" class="icon-camera-front pick-btn"></label>
+                        <input type="file" id="upload" fileread="photo" accept="image/*" ng-disabled="isDisabled" style="display: none" />
+                    </div>
+
+                    <button ng-click="cancel()" ng-show="photo" ng-disabled="isDisabled" class="icon-close pick-btn"></button>
+
+                </td>
+                <td style="width: 99%">
+                    <textarea class="chat-area" ng-model="message" style="max-width: 100%" placeholder="{{lang.TYPE_HERE}}"></textarea>
+                </td>
+                <td>
+                    <button ng-click="send()" ng-disabled="isDisabled" class="icon-android-arrow-forward send-btn"></button>
+                </td>
+            </tr>
+        </table>
+        <div class="image-pane" ng-show="photo">
+            <img ng-src="{{photo}}" style="width: 100%; max-width: 380px;" />
+        </div>
+    </div>
+</div>
+
+
+
+
+<detail-pane visible='paneShown'>
+    <img ng-src="{{display}}" style="width: 100%; max-width: 380px" id="currentPhoto"  /> 
+</detail-pane>
+
+
+
+
+<div id="ddmenu">
+    <button ng-click="fetchData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>

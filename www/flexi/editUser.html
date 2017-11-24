@@ -1,0 +1,127 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr ng-if="!editMode">
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.USER_ID_NOTE"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Code" ng-bind="lang.USER_ID"></label>
+                </th>
+                <td ng-if="!editMode" style="position: relative">
+                    <input type="tel" id="Code" name="Code" ng-model="current.Code" required ui-mask="999-999-9999?9" autocomplete="off" />
+                    <button type="button" class="icon-close icon-btn" ng-click="truncate()" tabindex="-1"></button>
+                </td>
+                <td ng-if="editMode">
+                    <b ng-bind="current.Code | tel"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Name" ng-bind="lang.NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="Name" name="Name" ng-model="current.Name" required maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Password" ng-bind="lang.PASSWORD"></label>
+                </th>
+                <td>
+                    <input ng-if="editMode" id="Password" type="password" name="Password" ng-model="current.Password" autocomplete="off" />
+                    <input ng-if="!editMode" type="password" id="Password" name="Password" ng-model="current.Password" required autocomplete="off" />
+                </td>
+            </tr>
+        </table>
+        <table class="form-table-vertical min-height-td">
+            <tr>
+                <td style="width: 20px">                     
+                    <input id="Active" type="checkbox" ng-model="current.Active" />
+                    <label for="Active"></label>
+                </td>
+                <td>
+                    <label class="caption" for="Active" ng-bind="lang.ACTIVE"></label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20px">
+                    <input id="CanViewAllTopUp" type="checkbox" ng-model="current.CanViewAllTopUp" />
+                    <label for="CanViewAllTopUp"></label>
+                </td>
+                <td>
+                    <label class="caption" for="CanViewAllTopUp" ng-bind="lang.CAN_VIEW_ALL_TOPUP"></label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20px">
+                    <input id="CanManageAccount" type="checkbox" ng-model="current.CanManageAccount" />
+                    <label for="CanManageAccount"></label>
+                </td>
+                <td>
+                    <label class="caption" for="CanManageAccount" ng-bind="lang.CAN_MANAGE_ACCOUNT"></label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20px">
+                    <input id="CanManageDealer" type="checkbox" ng-model="current.CanManageDealer" />
+                    <label for="CanManageDealer"></label>
+                </td>
+                <td>
+                    <label class="caption" for="CanManageDealer" ng-bind="lang.CAN_MANAGE_DEALER"></label>
+                </td>
+            </tr> 
+        </table>
+        <table class="form-table-horizontal">
+            <!--<tr ng-if="editMode">
+                <th>
+                    <label ng-bind="lang.LAST_LOGIN"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.LastLoginDate | date: 'd-M-yyyy h:mm a'"></b>
+                </td>
+            </tr>
+            <tr ng-if="editMode">
+                <th>
+                    <label ng-bind="lang.CREATED_BY"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.CreatedBy | tel"></b>
+                </td>
+            </tr>
+            <tr ng-if="editMode">
+                <th>
+                    <label ng-bind="lang.CREATED_ON"></label>
+                </th>
+                <td>
+                    <b ng-bind="current.CreatedOn | date: 'd-M-yyyy h:mm a'"></b>
+                </td>
+            </tr>-->
+            <tr>
+                <td>
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table> 
+    </form>
+</div>
+
+<div id="ddmenu">
+    <button ng-click="delete()">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button> 
+</div>
+
+ 
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+

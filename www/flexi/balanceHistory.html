@@ -1,0 +1,53 @@
+﻿<div id="content" class="level-1">
+    <div style="width: 100%; overflow-x: scroll">
+        <table class="data hover">
+            <thead>
+                <tr>
+                    <td style="min-width: 75px; width: 75px" ng-bind="lang.DATE"></td>
+                    <td style="min-width: 220px" ng-bind="lang.REMARK"></td>
+                    <td style="min-width: 110px; width: 110px" ng-bind="lang.AMOUNT"></td>
+                    <td style="min-width: 110px; width: 110px" ng-bind="lang.BALANCE"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='model in list'>
+                    <td ng-bind="model.Time | date: 'h:mm a'">                     
+                    </td>
+                    <td style="white-space: nowrap" ng-bind="model.Remark">                         
+                    </td>
+                    <td style="text-align: right" ng-class="{'highlight': model.Amount > 0 }" ng-bind="model.Amount | number: 3">                         
+                    </td>
+                    <td style="text-align: right" ng-bind="model.Balance | number: 3"> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+     
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<div id="menu">
+    <button class="icon-android-arrow-back" title="{{lang.PREVIOUS_DAY}}" ng-click="previous()" ng-disabled="isDisabled"></button>
+    <select id="dateFilter" style="max-width: 210px" ng-change="onChange()" ng-disabled="isDisabled" ng-model="filter" ng-options="item as item.name for item in filters"></select>
+    <button class="icon-android-arrow-forward" title="{{lang.NEXT_DAY}}" ng-click="next()" ng-disabled="isDisabled"></button>    
+</div>
+
+ 
+ 
+
+
+<div id="ddmenu">
+    <button ng-click="fetchData()" ng-disabled="isDisabled">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

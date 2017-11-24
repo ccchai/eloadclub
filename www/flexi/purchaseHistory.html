@@ -1,0 +1,80 @@
+﻿<div id="content">
+    <div class="data-list">
+        <div class="list-item" ng-repeat="model in list" ng-click="onClick(model)">
+            <p ng-bind="'RM ' + (model.Amount | number: 2)"></p>
+            <small ng-bind="model.CreatedOn | date: 'd-M-yyyy h:mm a'"></small>
+            <span ng-if="model.Remark" ng-bind="lang[model.Purpose] + ' ' + model.Remark"></span>
+            <span ng-if="!model.Remark" ng-bind="lang[model.Status]"></span>
+            <div ng-class="getClassName(model)"></div>
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<detail-pane visible='paneShown'>
+    <h6 ng-bind="lang.STATUS"></h6>
+    <mark ng-bind="lang[current.Status]"></mark>
+
+    <h6 ng-bind="lang.AMOUNT"></h6>
+    <mark ng-bind="'RM ' + (current.Amount | number: 2)"></mark>
+
+    <h6 ng-bind="lang.BANK"></h6>
+    <mark ng-bind="current.Bank"></mark>
+
+    <div ng-show="current.BankInDate">
+        <h6 ng-bind="lang.BANK_IN_DATE"></h6>
+        <mark ng-bind="current.BankInDate"></mark>
+    </div>
+
+    <h6 ng-bind="lang.DEALER"></h6>
+    <mark ng-bind="current.ToDealer"></mark>
+
+    <div ng-show="current.Remark">
+        <h6 ng-bind="lang.REMARK"></h6>
+        <mark ng-bind="lang[current.Purpose] + ' ' + current.Remark"></mark>
+    </div>
+
+    <h6 ng-bind="lang.CREATED_BY"></h6>
+    <mark ng-bind="current.CreatedBy | tel"></mark>
+
+    <h6 ng-bind="lang.CREATED_ON"></h6>
+    <mark ng-bind="current.CreatedOn | date: 'd-M-yyyy h:mm a'"></mark>
+
+
+    <h6 ng-bind="lang.PHOTOS"></h6>
+    <mark ng-show="!current.Photo" ng-bind="lang.PHOTO"></mark>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px; margin: 0 0 20px 0" ng-show="current.Photo" id="currentPhoto" />
+
+    <div style="padding: 10px;" ng-show="current.Status === 'Pending'">
+        <button class="btn btn-all" ng-click="cancel()" style="margin: 0 auto" ng-disabled="isDisabled" ng-bind="lang.CANCEL"></button>
+    </div>
+</detail-pane>
+
+
+
+<div id="ddmenu">
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+
+
+
+<!--<div id="lightbox" ng-show="showLightbox">
+    <div>
+        <img ng-src="{{current.Photo}}" />
+    </div>
+</div>
+
+<div id="overlay" ng-show="showLightbox">
+    <a href="" class="close icon-cross" ng-click="showLightbox = false"></a>
+</div>-->

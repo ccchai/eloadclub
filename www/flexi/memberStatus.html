@@ -1,0 +1,78 @@
+﻿<div id="content" class="level-1">
+    <div class="search" style="border: none; background: none; padding: 0">
+        <select ng-change="fetchData()" ng-model="sourceId" style="max-width: none" required ng-options="o.Id as o.Name for o in members" ng-disabled="isDisabled"></select>
+    </div>
+    <div class="data-list">
+        <div class="list-item" ng-repeat='model in list' ng-click="onClick(model)">
+            <p ng-bind="model.Phone | tel"></p>
+            <small ng-bind="model.CreatedOn | date: 'h:mm a'"></small>
+            <span ng-bind="model.Product + ' ~ RM ' + (model.Amount | number:2)"></span>
+            <em ng-bind="model.AmountName"></em>
+            <div ng-class="{'icon-exclamation': model.Status == 'Failed', 'icon-check': model.Status == 'Success', 'icon-hourglass': model.Status == 'Pending', 'icon-question': model.Status == 'Processed'}"></div>
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<detail-pane visible='paneShown'>
+    <h6 ng-bind="lang.STATUS"></h6>
+    <mark ng-bind="lang[current.Status]"></mark>
+
+    <h6 ng-bind="lang.PRODUCT"></h6>
+    <mark ng-bind="current.Product"></mark>
+
+    <h6 ng-bind="lang.AMOUNT"></h6>
+    <mark>
+        RM
+        <span ng-bind="current.Amount | number: 2"></span>
+        <span ng-show="current.AmountName" ng-bind="'~ ' + current.AmountName"></span>
+    </mark>
+
+    <h6 ng-bind="lang.PHONE">  </h6>
+    <mark ng-bind="current.Phone | tel"></mark>
+
+    <div ng-show="current.AccountNo">
+        <h6 ng-bind="lang.ACCOUNT_NO"></h6>
+        <mark ng-bind="current.AccountNo"></mark>
+    </div>
+
+    <div ng-show="current.Memo">
+        <h6 ng-bind="lang.MEMO"></h6>
+        <mark ng-bind="current.Memo"></mark>
+    </div>
+
+    <h6 ng-bind="lang.CREATED_ON"></h6>
+    <mark ng-bind="(current.CreatedBy | tel) + ' / ' + (current.CreatedOn | date: 'd-M-yyyy h:mm a')"></mark> 
+</detail-pane>
+
+<div id="menu">
+    <button ng-show="!isFindMode" class="icon-android-arrow-back" title="{{lang.PREVIOUS_DAY}}" ng-click="previous()" ng-disabled="isDisabled"></button>
+    <select ng-show="!isFindMode" id="dateFilter" style="max-width: 210px" ng-change="onChange()" ng-disabled="isDisabled" ng-model="filter" ng-options="item as item.name for item in filters"></select>
+    <button ng-show="!isFindMode" class="icon-android-arrow-forward" title="{{lang.NEXT_DAY}}" ng-click="next()" ng-disabled="isDisabled"></button>
+    <form>
+        <input ng-show="isFindMode" style="max-width: 230px" type="tel" ng-model="findText" placeholder="{{lang.ENTER_PHONE}}" id="phone" autocomplete="off" />
+        <button ng-show="isFindMode" ng-click="onFind()" ng-disabled="isDisabled" class="icon-android-arrow-forward"></button>
+    </form>
+</div>
+
+
+
+<div id="ddmenu">
+    <button ng-click="find()" ng-disabled="isDisabled">
+        <i class="icon-ios-search-strong"></i>
+        <span ng-bind="lang.FIND"></span>
+    </button>
+
+    <button ng-click="fetchData()" ng-show="!isFindMode" ng-disabled="isDisabled">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

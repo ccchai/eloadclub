@@ -1,0 +1,75 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-information-circled"></small>
+                        <span ng-bind="lang.USER_ID_NOTE"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Name" ng-bind="lang.ACCOUNT_NAME"></label>
+                </th>
+                <td>
+                    <input type="text" id="Name" name="Name" ng-model="current.Name" maxlength="100" required ng-blur="blur()" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Code" ng-bind="lang.USER_ID"></label>
+                </th>
+                <td style="position: relative">
+                    <input type="tel" id="Code" name="Code" ng-model="current.Code" required ui-mask="999-999-9999?9" autocomplete="off" />
+                    <button type="button" class="icon-close icon-btn" ng-click="truncate()" tabindex="-1"></button>            
+                </td>
+            </tr> 
+            <tr>
+                <th>                   
+                    <label for="UserName" ng-bind="lang.USER_NAME"></label>
+                </th>
+                <td>
+                    <input id="UserName" type="text" name="UserName" ng-model="current.UserName" required maxlength="100" autocomplete="off" /> 
+                </td>
+            </tr>
+            <tr>
+                <th>                    
+                    <label for="Password" ng-bind="lang.PASSWORD"></label>
+                </th>
+                <td>
+                    <input type="password" id="Password" name="Password" ng-model="current.Password" required autocomplete="off" /> 
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="RebatePlan" ng-bind="lang.REBATE_PLAN"></label> 
+                </th>
+                <td>
+                    <select id="RebatePlan" name="RebatePlan" ng-model="current.RebatePlan" required ng-options="o.Id as o.Name for o in plans"></select>      
+                </td>
+            </tr>  
+            <tr>
+                <td colspan="2" style="padding-top: 14px">
+                    <div class="warning">
+                        <i class="icon-alert-circled"></i>
+                        <span ng-bind="lang.COLLECT_MEMBERSHIP_FEE"></span> 
+                    </div>
+                </td>
+            </tr>
+            <tr>                 
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

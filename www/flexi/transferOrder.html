@@ -1,0 +1,37 @@
+﻿<div id="content">
+    <div class="search">
+        <input type="text" ng-model='searchText' autocomplete="off" />
+        <span class="icon-ios-search-strong"></span>
+        <i ng-bind="filtered.length"></i>
+    </div>
+
+    <div class="data-list">
+        <div class="list-item" ng-repeat='model in filtered = (list | filter:searchText)' ng-click="onClick(model)">
+            <p ng-bind="'RM ' + (model.Amount | number: 2)"></p>
+            <span ng-bind="model.FromDealer"></span>
+            <small ng-bind="model.Bank"></small>
+            <em ng-bind="model.CreatedOn | date: 'h:mm a'"></em>
+            <div class="icon-hourglass"></div>
+        </div>
+    </div>
+     
+
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+    
+
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<div id="ddmenu"> 
+    <button ng-click="fetchData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>

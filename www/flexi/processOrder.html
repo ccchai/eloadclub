@@ -1,0 +1,63 @@
+﻿<div id="content">
+    <div class="search">
+        <input type="text" ng-model='searchText' autocomplete="off" />
+        <span class="icon-ios-search-strong"></span>
+        <i ng-bind="filtered.length"></i>
+    </div>
+
+    <div class="data-list">
+        <div ng-click="onClick(model, $event)" class="list-item" ng-repeat="model in filtered = (list | filter:searchText)">
+            <p>
+                <span ng-bind="model.Phone | tel"></span>
+                <span ng-show="model.AccountNo" ng-bind="'# ' + model.AccountNo"> </span>
+            </p>
+            <small ng-bind="model.CreatedOn | date: 'h:mm a'"></small>
+            <span ng-bind="model.Product + ' ~ RM ' + (model.Amount | number:2)"> </span>
+            <em ng-bind="model.AmountName"></em>
+            <input id="{{model.Id}}" type="checkbox" ng-model="model.IsChecked" />
+            <label for="{{model.Id}}"></label>
+        </div>
+    </div>
+</div>
+
+<detail-pane visible='paneShown'>
+    <h6 ng-bind="lang.PRODUCT"></h6>
+    <mark ng-bind="current.Product"></mark>
+
+    <h6 ng-bind="lang.AMOUNT"></h6>
+    <mark>
+        RM
+        <span ng-bind="current.Amount | number: 2"></span>
+        <span ng-show="current.AmountName" ng-bind="'~ ' + current.AmountName"></span>
+    </mark>
+
+    <h6 ng-bind="lang.PHONE"></h6>
+    <mark ng-bind="current.Phone | tel"></mark>
+
+    
+    <div ng-show="current.AccountNo">
+        <h6 ng-bind="lang.ACCOUNT_NO"></h6>
+        <mark ng-bind="current.AccountNo"></mark>
+    </div>       
+   
+    <div style="padding: 10px;">
+        <button class="btn btn-all" ng-click="confirm()" style="margin: 0 auto" ng-disabled="isDisabled" ng-bind="lang.CONFIRM"></button>
+    </div>
+</detail-pane>
+
+<div id="ddmenu">
+    <button ng-click="delete()" ng-disabled="isDisabled">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button>
+    <button ng-click="fetchData()" ng-disabled="isDisabled">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

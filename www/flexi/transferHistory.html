@@ -1,0 +1,76 @@
+﻿<div id="content">
+    <div class="search">
+        <input type="text" ng-model='searchText' autocomplete="off" />
+        <span class="icon-ios-search-strong"></span>
+        <i ng-bind="filtered.length"></i>
+    </div>
+
+    <div class="data-list">
+        <div class="list-item" ng-repeat='model in filtered = (list | filter:searchText)' ng-click="onClick(model)">
+            <p ng-bind="model.ToDealer"></p>
+            <small ng-bind="model.Bank"></small>
+            <span ng-bind="'RM ' + (model.Amount | number: 2)"></span>
+            <em ng-bind="model.CreatedOn | date: 'd-M-yyyy h:mm a'"></em>
+            <div ng-class="model.Status == 'Success' ? 'icon-check' : 'icon-exclamation'"></div>
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<detail-pane visible='paneShown'>
+    <h6 ng-bind="lang.STATUS"></h6>
+    <mark ng-bind="lang[current.Status]"></mark>
+
+    <h6 ng-bind="lang.AMOUNT"></h6>
+    <mark ng-bind="'RM ' + (current.Amount | number: 2)"></mark>
+
+    <h6 ng-bind="lang.DEALER"></h6>
+    <mark ng-bind="current.FromName"></mark>
+
+    <h6 ng-bind="lang.BANK"></h6>
+    <mark ng-bind="current.Bank"></mark>
+
+    <h6 ng-bind="lang.BANK_IN_DATE"></h6>
+    <mark ng-bind="current.BankInDate | date: 'd-M-yyyy h:mm a'"></mark>
+
+    <h6 ng-bind="lang.REMARK"></h6>
+    <mark ng-bind="lang[current.Purpose] + ' ' + current.Remark"></mark>
+
+
+    <h6 ng-bind="lang.PHOTOS"></h6>
+    <mark ng-show="!current.Photo" ng-bind="lang.PHOTO"></mark>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px; margin: 0 0 20px 0" ng-show="current.Photo" id="currentPhoto" />
+</detail-pane>
+
+<div id="ddmenu">
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+    <button ng-click="exportCsv()" ng-show="!isPhoneGap">
+        <i class="icon-receipt-1"></i>
+        <span>CSV</span>
+    </button>
+</div>
+
+
+<a id="dllink" style="display: none" target="_blank"></a>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+
+<!--<div id="lightbox" ng-show="showLightbox">
+    <div>
+        <img ng-src="{{current.Photo}}" />
+    </div>
+</div>
+
+<div id="overlay" ng-show="showLightbox">
+    <a href="" class="close icon-cross" ng-click="showLightbox = false"></a>
+</div>-->

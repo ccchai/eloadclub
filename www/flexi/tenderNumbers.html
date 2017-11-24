@@ -1,0 +1,38 @@
+﻿<div id="content">
+
+    <div class="search" style="margin-top: 60px">
+        <input type="text" ng-model='searchText' autocomplete="off" />
+        <span class="icon-search"></span>
+        <i ng-bind="filtered.length"></i>
+    </div>
+
+    <div class="data-list">
+        <div ng-click="onClick(model)" class="list-item" ng-repeat="model in filtered = (list | filter:searchText)">
+            <p ng-bind="model.Name | tel"></p>
+            <span ng-bind="'RM ' + (model.Amount | number: 2)"></span>
+            <em style="font-size: 14px" ng-bind="getPriceType(model)"></em>
+            <div class="icon-android-arrow-forward"></div>
+        </div>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<a href="#/how-it-works" style="display: block;  box-shadow: 0 0 4px #dcdcdc; background: #39628d; color: #fff; text-decoration: none; text-align: center; line-height: 50px; position: fixed; left: 0; right: 0; top: 50px; font-weight: 600;">
+    {{lang.HOW_IT_WORKS}} &rarr;
+</a>
+
+
+
+<div id="ddmenu">
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

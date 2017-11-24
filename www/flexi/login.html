@@ -1,0 +1,51 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-vertical">
+            <tr>
+                <th>
+                    <label for="Code" ng-bind="lang.USER_ID"></label>
+                </th>
+            </tr>
+            <tr>
+                <td style="position: relative">
+                    <input type="tel" id="Code" name="Code" ng-model="Code" required ui-mask="999-999-9999?9" autocomplete="off" />
+                    <button type="button" class="icon-close icon-btn" ng-click="truncate()" tabindex="-1"></button>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Password" ng-bind="lang.PASSWORD"></label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" id="Password" name="Password" ng-model="Password" required autocomplete="off" />
+                </td>
+            </tr>
+            <tr>                 
+                <td>
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SIGN_IN"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="form-ul-login">
+                        <li><b ng-bind="lang.RULEZ"></b></li>
+                        <li>U-Plus Software</li>
+                        <li>Maybank: 5111 1351 4139</li>
+                        <li>CIMB: 800 529 3124</li>
+                        <li ng-show="!isPhoneGap()" style="padding: 20px 0 0 0">
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=my.com.uplus.eload">
+                                <img src="img/gplay.png" />
+                            </a>
+                        </li>                       
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

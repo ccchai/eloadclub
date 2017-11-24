@@ -1,0 +1,122 @@
+﻿<!--<div class="home-help">
+    <a href="#/helpline" class="icon-android-arrow-forward" style="display: block; text-decoration: none; position: absolute; top: 0; right: 0; width: 50px; height: 50px; line-height: 50px; color: #fff; font-size: 22px;"></a>
+    <a href="#/helpline" class="btn" ng-bind="lang.HELPLINE"></a>
+    <b>013 4288 319</b>
+    <span ng-bind="lang.HELPLINE_CAPTION"></span>
+
+
+</div>-->
+
+
+<div id="content">
+    <div class="home-help" colspan="4" style="line-height: 50px">
+        <em class="icon-dollar-bag"></em>
+        &nbsp;
+        <span>RM {{balance | number: 3}}</span>
+        &nbsp;
+        <button class="icon-refresh" ng-click="getBalance()" style="background: #4fd2c2; font-weight: 600"></button>
+    </div>
+    <table class="home-table">         
+        <tr>
+            <th colspan="4" style="text-align: center; padding: 10px 10px 10px 10px; font-weight: 600">
+                <small style="font-size: 12px;" ng-bind="current.NewsDate | date: 'd-M-yyyy h:mm a'"></small>
+                <h2 style="margin: 10px" ng-bind="getSubject()"></h2>
+                <p class="home-news" ng-bind="getMemo()"></p>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <a ng-href="#/top-up" ng-click="onLinkClick()">
+                    <em class="icon-hand-coin"></em>
+                    <span ng-bind="lang.TOP_UP"></span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="#/status" ng-click="onLinkClick()">
+                    <em class="icon-star-5"></em>
+                    <span ng-bind="lang.STATUS"></span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="#/user" ng-click="onLinkClick()">
+                    <em class="icon-user-2"></em>
+                    <span ng-bind="lang.USER"></span>
+                </a>
+            </td>
+
+            <td>
+                <a ng-href="#/purchase-airtime" ng-click="onLinkClick()">
+                    <em class="icon-atm"></em>
+                    <span ng-bind="lang.PURCHASE_AIRTIME"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a ng-href="#/member" ng-click="onLinkClick()">
+                    <em class="icon-connection-2"></em>
+                    <span ng-bind="lang.DEALER"></span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="#/profile" ng-click="onLinkClick()">
+                    <em class="icon-profile-gentleman-1"></em>
+                    <span ng-bind="lang.PROFILE"></span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="#/language" ng-click="onLinkClick()">
+                    <em class="icon-globe-1"></em>
+                    <span ng-bind="lang.LANGUAGE"></span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="#/transfer-order" ng-click="onLinkClick()">
+                    <em class="icon-basket-1"></em>
+                    <span ng-bind="lang.TRANSFER_ORDER"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <!--<td colspan="2" style="height: 50px; padding: 0; position: relative">
+                <a href="#/tender-numbers">
+                    <span class="icon-shop" style="font-size: 22px"></span>
+                    &nbsp;
+                    <span ng-bind="lang.TENDER_NUMBER"></span>
+                    <b ng-show="showNewLabel" style="position: absolute; right: 10px; top: 10px; display: block; width: 32px; height: 32px; line-height: 32px; border-radius: 90px; font-size: 10px; background: #FF357B; color: #fff;">NEW</b>
+                </a>
+            </td>
+
+            <td colspan="2" style="height: 50px; padding: 0; position: relative">
+                <a href="#/helpline">
+                    <span class="icon-chat-1" style="font-size: 22px"></span>
+                    &nbsp;
+                    <span ng-bind="lang.HELPLINE"></span>
+                    <b ng-show="help > 0" ng-bind="help" style="position: absolute; right: 10px; top: 10px; display: block; width: 32px; height: 32px; line-height: 32px; border-radius: 90px; background: #FF357B; color: #fff;"></b>
+                </a>
+            </td>-->
+
+            <td colspan="4" style="height: 50px; padding: 0; position: relative">
+                <a href="#/helpline">
+                    <span class="icon-chat-1" style="font-size: 22px"></span>
+                    &nbsp;
+                    <span ng-bind="lang.HELPLINE"></span>
+                    <b ng-show="help > 0" ng-bind="help" style="position: absolute; right: 10px; top: 10px; display: block; width: 32px; height: 32px; line-height: 32px; border-radius: 90px; background: #FF357B; color: #fff;"></b>
+                </a>
+            </td>
+            
+        </tr>
+    </table>
+</div>
+
+<div id="ddmenu">
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

@@ -1,0 +1,57 @@
+﻿<div id="content">
+    <!--<div class="data-list">
+        <div class="list-item" ng-repeat="model in products">
+            <p ng-bind="model.title"></p>
+            <span ng-bind="model.description"></span>
+            <small ng-bind="'Buy: ' + (model.price | number: 2)" ng-click="buy(model)"></small>
+            <em ng-bind="model.localizedPrice | number: 2"></em>
+            <div ng-bind="model.balance" ng-click="consume(model)"></div>
+        </div>
+    </div>-->
+
+
+    <div style="padding: 10px 20px">
+        <table>
+            <tr>
+                <td style="width: 50px">
+                    Email:
+                </td>
+                <td>
+                    <select id="currentEmail" name="currentEmail" ng-model="currentEmail" ng-options="o.name as o.name for o in accounts"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div>
+        <div class="winners-a-item" ng-repeat="model in tallies" style="height: 35px">
+            <b class="winners-b-item" ng-bind="model.Day | date: 'd/M/yyyy'" style="float: left; margin-left: 10px; line-height: 35px"> </b>
+            <b class="winners-b-item" ng-bind="model.Quantity | number: 0" style="float: right; margin: 0 10px 0 0; line-height: 35px"> </b>
+        </div>
+
+        <div class="winners-a-item" ng-repeat="model in products" style="height: 35px">
+            <b class="winners-b-item" ng-bind="'RM ' + (model.price | number: 2)" style="float: left; margin-left: 10px; line-height: 35px"> </b>
+            <button class="prizes-button-msg" ng-bind="model.balance" ng-click="consume(model)" style="width: 70px"></button>
+            <button class="prizes-button-msg" ng-click="buy(model)" style="width: 70px; margin: 0 10px">Buy</button>
+        </div>
+
+    </div>
+
+
+    <p class="no-data" ng-show="products && products.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<div id="ddmenu">
+    <button ng-click="fetchData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

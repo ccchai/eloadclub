@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <title>eLoad Club</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#4fd2c2">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fd2c2">
+    <link href="bundle.min.css?v=1.5.5" rel="stylesheet" />
+    <script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+    <div class="splash" ng-cloak="">
+        <span>
+            <i></i>
+            eLoad Club
+        </span>
+    </div>
+
+    <div loading-indicator></div>
+
+    <div ng-controller="NavCtrl">
+        <div id="header">
+            <button class="icon-navicon header-button-hamburger" ng-click="slideOut()"></button>
+            <!--<em class="{{appIcon}}"></em>-->
+            <span ng-bind="pageTitle"></span>
+            <button class="icon-android-more-vertical header-button-more" ng-class="moreMenu" ng-click="showMoreMenu($event)"></button>
+        </div>
+        <div id="nav" ng-class="{'slide': showSlideout}">
+            <div id="profile">
+                <div class="back">
+                    <button class="icon-navicon" ng-click="slideOut()"></button>
+                </div>
+                <div ng-show="isAuthenticated">
+                    <em class="icon-profile-1"></em>
+                    <span ng-bind="userName"></span>
+                    <a href="" ng-click="signOut()" ng-bind="lang.SIGN_OUT"></a>
+                </div>
+                <div id="balance" ng-show="isAuthenticated">
+                    <em class="icon-dollar-bag"></em>
+                    <span>RM {{balance | number: 3}}</span>
+                    <button class="icon-refresh" ng-disabled="disabled" ng-click="getBalance()"></button>
+                </div>
+            </div>
+            <div class="nav-scroll">
+                <ul>
+                    <li ng-repeat="link in links">
+                        <a ng-href="{{link.Url}}" ng-if="link.Icon" ng-click="onClick(link)" ng-class="{  'active-link': link.Visible == 1}">
+                            <em class=" {{link.Icon}} ">
+                            </em>
+                            <span ng-bind="lang[link.Name]"></span>
+                            <i ng-class="{'icon-chevron-down': link.Visible == -1, 'icon-chevron-up': link.Visible == 1}"></i>
+                        </a>
+                        <hr ng-if="!link.Icon" />
+                        <ul ng-show="link.Visible == 1">
+                            <li ng-repeat="lk in link.Data">
+                                <a ng-href="{{lk.Url}}" ng-if="lk.Icon" ng-click="onClick(lk)">
+                                    <em class="{{lk.Icon}}"></em>
+                                    <span ng-bind="lang[lk.Name]"></span>
+                                </a>
+                                <hr ng-if="!lk.Icon" />
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="cover" ng-class="{'slide': showSlideout}" ng-click="slideOut()"></div>
+    </div>
+
+    <div ng-view autoscroll="true" style="height: 100%;"></div>
+
+    <script src="core.min.js?v=1.5.1"></script>
+    <script src="bundle.min.js?v=1.5.5"></script>
+</body>
+</html>
+
+

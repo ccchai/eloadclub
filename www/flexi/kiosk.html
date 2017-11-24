@@ -1,0 +1,197 @@
+﻿<div id="content" style="padding: 0">
+
+    <button class="icon-close" ng-click="onSignOut()" ng-show="mode == 0" style="background: none; position: fixed; right: 0; top: 0; width: 50px; height: 50px; color:  #777"></button>
+
+    <div ng-show="mode == 0">
+        <table class="tbl-title">
+            <tr>
+                <td style="padding: 10px">
+                    <h2>Top Up Kiosk</h2>
+                </td>
+            </tr>
+        </table>
+        <div class="data-list">
+            <div class="list-item" ng-click="changeLanguage('EN')">
+                <p class="big">English</p>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+            <div class="list-item" ng-click="changeLanguage('MY')">
+                <p class="big">Bahasa Melayu</p>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+            <div class="list-item" ng-click="changeLanguage('CN')">
+                <p class="big">中文</p>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 1">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goBack(0)"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.KIOSK_A"></h2>
+                </td>
+            </tr>
+        </table>
+        <div class="data-list">
+            <div class="list-item" ng-repeat="model in products" ng-click="tapProduct(model)">
+                <p class="big" ng-bind="model.name"></p>
+                <img ng-src="{{model.icon}}" />
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 2">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goBack(1)"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.KIOSK_B"></h2>
+                </td>
+            </tr>
+        </table>
+        <form ng-show="selectedProduct.otherAmount" style="max-width: none">
+            <div class="search search-big">
+                <input type="number" ng-model='amount' format-decimal min="1" max="99999" id="airtime" autocomplete="off" />
+                <span class="icon-hand-coin"></span>
+                <button ng-click="onClickAmount(amount)" tabindex="-1" style="height: 48px; line-height: 48px; width: 48px">OK</button>
+            </div>
+        </form>
+        <div class="data-list">
+            <div class="list-item" ng-repeat="model in amounts" ng-click="onClickAmount(model.amt, model.name)">
+                <p class="big" ng-bind="model.name + 'RM ' + model.amt"></p>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="mode == 3">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goBack(2)"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.KIOSK_C"></h2>
+                </td>
+            </tr>
+        </table>
+        <form>
+            <div class="search search-big">
+                <input type="tel" ng-model='selectedPhone' ui-mask="{{selectedProduct.mask.replace('999', '?9?9?9').replace('99', '?9?9')}}" id="phone" autocomplete="off" />
+                <span class="icon-call-1"></span>
+            </div>
+            <p style="margin: 10px auto; text-align: center" ng-bind="selectedProduct.sample"></p>
+
+            <div class="keyboard-div">
+                <table class="keyboard">
+                    <tr>
+                        <td ng-click="selectedPhone = selectedPhone + '1'; play()">1</td>
+                        <td ng-click="selectedPhone = selectedPhone + '2'; play()">2</td>
+                        <td ng-click="selectedPhone = selectedPhone + '3'; play()">3</td>
+                    </tr>
+                    <tr>
+                        <td ng-click="selectedPhone = selectedPhone + '4'; play()">4</td>
+                        <td ng-click="selectedPhone = selectedPhone + '5'; play()">5</td>
+                        <td ng-click="selectedPhone = selectedPhone + '6'; play()">6</td>
+                    </tr>
+                    <tr>
+                        <td ng-click="selectedPhone = selectedPhone + '7'; play()">7</td>
+                        <td ng-click="selectedPhone = selectedPhone + '8'; play()">8</td>
+                        <td ng-click="selectedPhone = selectedPhone + '9'; play()">9</td>
+                    </tr>
+                    <tr>
+                        <td ng-click="selectedPhone = selectedPhone.slice(0, -1); play()" class="icon-backspace-outline"></td>
+                        <td ng-click="selectedPhone = selectedPhone + '0'; play()">0</td>
+                        <td ng-click="onEnterPhone()">OK</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="mode == 4">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="goBack(3)"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.KIOSK_D"></h2>
+                </td>
+            </tr>
+        </table>
+        <form>
+            <div class="search search-big">
+                <input type="tel" ng-model='selectedAccount' id="account" autocomplete="off" />
+                <span class="icon-receipt-3"></span>
+            </div>
+        </form>
+        <div class="keyboard-div">
+            <table class="keyboard">
+                <tr>
+                    <td ng-click="selectedAccount = selectedAccount + '1'; play()">1</td>
+                    <td ng-click="selectedAccount = selectedAccount + '2'; play()">2</td>
+                    <td ng-click="selectedAccount = selectedAccount + '3'; play()">3</td>
+                </tr>
+                <tr>
+                    <td ng-click="selectedAccount = selectedAccount + '4'; play()">4</td>
+                    <td ng-click="selectedAccount = selectedAccount + '5'; play()">5</td>
+                    <td ng-click="selectedAccount = selectedAccount + '6'; play()">6</td>
+                </tr>
+                <tr>
+                    <td ng-click="selectedAccount = selectedAccount + '7'; play()">7</td>
+                    <td ng-click="selectedAccount = selectedAccount + '8'; play()">8</td>
+                    <td ng-click="selectedAccount = selectedAccount + '9'; play()">9</td>
+                </tr>
+                <tr>
+                    <td ng-click="selectedAccount = selectedAccount.slice(0, -1); play()" class="icon-backspace-outline"></td>
+                    <td ng-click="selectedAccount = selectedAccount + '0'; play()">0</td>
+                    <td ng-click="onEnterAccountNo()">OK</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div ng-show="mode == 5">
+        <table class="tbl-title">
+            <tr>
+                <th>
+                    <button class="icon-android-arrow-back back-btn" ng-click="stepBack()"></button>
+                </th>
+                <td>
+                    <h2 ng-bind="lang.KIOSK_E"></h2>
+                </td>
+            </tr>
+        </table>
+
+        <div class="confirm-div">
+            <img ng-src="{{selectedProduct.icon}}" />
+            <p ng-bind="selectedProduct.name"></p>
+            <p ng-bind="selectedPhone | tel"></p>
+            <p ng-show="selectedAccount" ng-bind="selectedAccount"></p>
+            <p>{{selectedAmountName}} RM {{selectedAmount | number: 2}}</p>
+            <button class="btn btn-all" id="confirm" ng-click="confirm()" ng-bind="lang.CONFIRM"></button>
+        </div>
+    </div>
+
+    <div ng-show="mode == 6" class="sending-div">
+        <div class="sending" ng-show="isDisabled"></div>
+        <i ng-show="!isDisabled" class="icon-information-circled"></i>
+        <p ng-bind="status"></p>
+        <button class="btn btn-all" id="back" ng-show="!isDisabled" ng-click="startPage()" ng-bind="lang.START_PAGE"></button>
+    </div>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

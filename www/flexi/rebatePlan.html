@@ -1,0 +1,25 @@
+﻿<div id="content">
+    <div class="data-list">
+        <div ng-click="onClick(model)" class="list-item" ng-repeat="model in list">
+            <p ng-bind="model.Name"></p>
+            <span>&nbsp;</span>             
+            <div class="icon-check"></div>
+        </div>
+    </div>
+</div>
+
+<div id="ddmenu">
+    <!--<button ng-click="add()">
+        <i class="icon-add-1"></i>
+        <span ng-bind="lang.NEW"></span>
+    </button>-->
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'> 
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

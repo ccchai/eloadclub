@@ -1,0 +1,35 @@
+﻿<div id="content" style="text-align: right">
+    <table class="data">
+        <thead>
+          <tr>
+              <td ng-bind="lang.DATE"></td>
+              <td colspan="2" ng-bind="lang.DEALER"></td>               
+              <!--<td colspan="2">{{lang.USER}}</td>
+              <td colspan="2">{{lang.DEVICE}}</td>-->
+          </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="model in list">
+                <td style="width: 33%" ng-bind="model.Day | date: 'dd/MM'"></td>
+                <td style="width: 33%" ng-bind="'+' + (model.NewDealer | number: 0)"></td>
+                <td style="width: 33%" ng-bind="model.TotalDealer | number: 0"></td>
+                <!--<td style="width: 14.28%">+{{model.NewUser | number: 0}}</td>
+                <td style="width: 14.28%">{{model.TotalUser | number: 0}}</td>
+                <td style="width: 14.28%">+{{model.NewDevice | number: 0}}</td>
+                <td style="width: 14.28%">{{model.TotalDevice | number: 0}}</td>-->                
+            </tr>
+        </tbody>
+    </table>
+</div>
+ 
+<div id="ddmenu">    
+    <button ng-click="refreshData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'> 
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

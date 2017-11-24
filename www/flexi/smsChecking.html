@@ -1,0 +1,44 @@
+﻿<div id="menu">
+    <button ng-click="step = 'CS'" ng-class="{'active': step == 'CS'}" ng-bind="lang.CHECK_STATUS"></button>
+    <button ng-click="step = 'CB'" ng-class="{'active': step == 'CB'}" ng-bind="lang.CHECK_BALANCE"></button>
+</div>
+
+
+<div id="content" class="level-1">   
+    <form ng-show="step == 'CS'">
+        <table class="form-table-vertical">
+            <tr>
+                <th>
+                    <label for="phone" ng-bind="lang.ENTER_PHONE"></label>
+                </th>
+            </tr>
+            <tr>
+                <td style="position: relative">
+                    <input type="tel" ng-model='phone' id="phone" name="phone" ui-mask="999-999-9999?9" autocomplete="off" />
+                    <button type="button" class="icon-close icon-btn" ng-click="truncate()" tabindex="-1"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button ng-click="checkStatus()" class="btn btn-all" ng-disabled="isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form> 
+    <form ng-show="step == 'CB'">
+        <table class="form-table-vertical">
+             
+            <tr>
+                <td>
+                    <button ng-click="checkBalance()" class="btn btn-all" ng-disabled="isDisabled" ng-bind="lang.SEND_SMS"></button>
+                </td>
+            </tr>
+        </table>
+    </form> 
+</div>
+ 
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

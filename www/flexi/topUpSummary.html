@@ -1,0 +1,38 @@
+﻿<div id="content" class="level-1" style="text-align: right">
+    <table class="data">
+        <tbody ng-repeat='grp in list'>
+            <tr class="heading" ng-show="grp.CreatedBy">
+                <td style="text-align: left" ng-bind="grp.CreatedBy | tel"></td>
+                <td ng-bind="lang.TOP_UP"></td>                 
+                <td ng-bind="lang.REBATE"></td>
+            </tr>
+            <tr ng-repeat='model in grp.Data' ng-class="{'heading': !model.Product }">
+                <td style="text-align: left">
+                    <span ng-show="model.Product" ng-bind="model.Product"></span>
+                    <span ng-show="!grp.CreatedBy" ng-bind="lang.GRAND"></span>
+                    <span ng-show="!model.Product" ng-bind="lang.TOTAL"></span>
+                </td>
+                <td ng-bind="model.TopUp | number: 2">                    
+                </td>                
+                <td ng-bind="model.Rebate | number: 3">                     
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p> 
+</div>
+
+<div id="menu">
+    <select id="fromFilter" style="max-width: 114px" ng-disabled="isDisabled" ng-model="fromDate" ng-options="item as item.name for item in filters"></select>
+    <button class="icon-android-arrow-forward"></button>
+    <select id="toFilter" style="max-width: 114px" ng-disabled="isDisabled" ng-model="toDate" ng-options="item as item.name for item in filters"></select>
+    <button class="icon-ios-search-strong" title="{{lang.SEARCH}}" ng-click="fetchData()" ng-disabled="isDisabled"></button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+
+
+

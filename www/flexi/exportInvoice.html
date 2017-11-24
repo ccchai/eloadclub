@@ -1,0 +1,60 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-horizontal">
+            <tr>
+                <td colspan="2">
+                    <div class="warning">
+                        <small class="icon-alert-circled"></small>
+                        <span ng-bind="lang.EXPORT_INVOICE_MEMO"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Month" ng-bind="lang.MONTH"></label>
+                </th>
+                <td>
+                    <select id="Month" name="Month" ng-model="current.Month" ng-options="o.id as o.name for o in filters"></select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="CompanyName" ng-bind="lang.COMPANY"></label>
+                </th>
+                <td>
+                    <input type="text" id="CompanyName" name="CompanyName" ng-model="current.CompanyName" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="Phone" ng-bind="lang.PHONE"></label>
+                </th>
+                <td>
+                    <input type="tel" id="Phone" name="Phone" ng-model="current.Phone" maxlength="100" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>                     
+                    <label for="Address" ng-bind="lang.ADDRESS"></label>
+                </th>
+                <td>
+                    <textarea id="Address" name="Address" ng-model="current.Address" maxlength="255"></textarea>
+                </td>
+            </tr>           
+            <tr>
+                
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled || isPhoneGap" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

@@ -1,0 +1,48 @@
+﻿<div id="content">
+    <div class="data-list">
+        <div class="list-item" ng-repeat="model in list" ng-click="onClick(model, $event)">
+            <p ng-bind="model.Product"></p>
+            <small ng-bind="model.CreatedOn | date: 'd/M h:mm a'"></small>
+            <span ng-bind="model.CreatedBy + ': ' + model.Memo"></span>
+            <input id="{{model.Id}}" type="checkbox" ng-model="model.IsChecked" />
+            <label for="{{model.Id}}"></label>
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <button class="btn btn-all" ng-click="loadMore()" ng-show="canLoadMore" style="margin: 0 auto" ng-bind="lang.MORE"></button>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<detail-pane visible='paneShown'>
+    <h6 ng-bind="lang.PRODUCT"></h6>
+    <mark ng-bind="current.Product"></mark>
+
+    <h6 ng-bind="lang.CREATED_BY"></h6>
+    <mark ng-bind="current.CreatedBy + ' / ' + (current.CreatedOn | date: 'd-M-yyyy h:mm a')"></mark>
+
+    <h6 ng-bind="lang.MEMO"></h6>    
+    <mark ng-bind="current.Memo"></mark>
+    <mark ng-bind="current.Source"></mark>
+</detail-pane>
+
+<div id="ddmenu"> 
+    <button ng-click="selectAll()">
+        <i class="icon-check-box"></i>
+        <span ng-bind="lang.SELECT_ALL"></span>
+    </button>
+    <button ng-click="delete()">
+        <i class="icon-bin-2"></i>
+        <span ng-bind="lang.DELETE"></span>
+    </button>
+    <button ng-click="fetchData()">
+        <i class="icon-refresh"></i>
+        <span ng-bind="lang.REFRESH"></span>
+    </button>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+

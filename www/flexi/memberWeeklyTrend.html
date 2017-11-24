@@ -1,0 +1,43 @@
+﻿<div id="content" class="level-1">
+    <div class="search" style="border: none; background: none; padding: 0">
+        <select ng-change="fetchData()" ng-model="sourceId" style="max-width: none" required ng-options="o.Id as o.Name for o in members" ng-disabled="isDisabled"></select>
+    </div>
+    <div class="data-list">
+        <div ng-click="onClick(model)" class="list-item" ng-repeat="model in list" style="padding-bottom: 0">
+            <p ng-if="model.Product" ng-bind="model.Product" style="margin-left: 0"></p>
+            <p ng-if="!model.Product" ng-bind="lang.GRAND + ' ' + lang.TOTAL" style="margin-left: 0"></p>
+            <small style="font-size: 14px" ng-bind="'RM ' + (model.Data[0].Amount | number: 2)"></small>
+            <span jq-sparkline ng-model="model.Nums" style="margin-left: 0"></span>
+        </div>
+    </div>
+    <p class="no-data" ng-show="list.length === 0" ng-bind="lang.NOTHING_TO_DISPLAY"></p>
+</div>
+
+<detail-pane visible='paneShown'>     
+    <span jq-sparkline opts="1" ng-model="current.Nums"></span>
+    <table class="data">
+        <tbody>
+            <tr ng-repeat="model in current.Data">
+                <td style="text-align: left">
+                    <span ng-show="model.Week" ng-bind="lang.WEEK + ' ' + (model.Week | date: 'd-M-yyyy')"></span>
+                    <span ng-show="!model.Week" ng-bind="lang.GRAND + ' ' + lang.TOTAL"></span>
+                </td>
+                <td style="text-align: right" ng-bind="model.Amount | number: 2"></td>
+                 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</detail-pane>
+
+<div id="menu">
+    <button ng-click="changeStep(1)" ng-class="{'active': step == 1}" ng-bind="lang.TOP_UP"></button>
+    <button ng-click="changeStep(2)" ng-class="{'active': step == 2}" ng-bind="lang.Bonus"></button>
+</div>
+
+
+<modal-dialog visible='modalshown'>
+    <p ng-bind="modalbody"></p>
+</modal-dialog>
+
+

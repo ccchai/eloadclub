@@ -1,0 +1,43 @@
+﻿<div id="content">
+    <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+        <table class="form-table-vertical min-height-td">
+            <tr>
+                <td style="width: 20px">
+                    <input id="EN" type="radio" ng-model="language" value="EN" />
+                    <label for="EN"></label>
+                </td>
+                <td>
+                    <label class="caption" for="EN">English</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="MY" type="radio" ng-model="language" value="MY" />
+                    <label for="MY"></label>
+                </td>
+                <td>
+                    <label class="caption" for="MY">Bahasa Melayu</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="CN" type="radio" ng-model="language" value="CN" />
+                    <label for="CN"></label>
+                </td>
+                <td>
+                    <label class="caption" for="CN"> 中文</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-all" ng-disabled="isDisabled" ng-bind="lang.SUBMIT"></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+

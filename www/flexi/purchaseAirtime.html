@@ -1,0 +1,236 @@
+﻿<div id="content" class="level-1">
+    <div ng-show="step == 0" style="padding: 10px; max-width: 420px; margin: 0 auto">
+        <ul class="text-list">
+            <li style="font-weight: 600" ng-bind="lang.RULE4"></li>
+            <li style="font-weight: 600" ng-bind="lang.RULE7"></li>
+            <li ng-bind="lang.RULE1"></li>
+            <li ng-bind="lang.RULE2"></li>
+            <li ng-bind="lang.RULE3"></li>
+            <li ng-bind="lang.RULE6"></li>
+            <li ng-bind="lang.RULE5"></li>
+        </ul>
+        <button ng-click="goTo(2)" class="btn btn-all" style="margin: 10px auto" ng-bind="lang.NEXT"></button>
+    </div>
+
+    <div ng-show="step == 1">
+        <form name="myForm" ng-submit="submitForm(myForm)" novalidate>
+            <table class="form-table-horizontal">
+                <tr>
+                    <td colspan="2">
+                        <div class="warning">
+                            <small class="icon-information-circled"></small>
+                            <span ng-bind="lang.BANK_IN_INFO"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Amount" ng-bind="lang.AMOUNT"></label>
+                    </th>
+                    <td>
+                        <input type="number" id="Amount" name="Amount" ng-model="current.Amount" required min="1" max="999999" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Day" ng-bind="lang.DATE"></label>
+                    </th>
+                    <td>
+                        <select id="Day" ng-model="current.Day" ng-options="item.id as item.name for item in filters"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Hour" ng-bind="lang.TIME"></label>
+                    </th>
+                    <td>
+                        <table>
+                            <tr>
+                                <td style="padding: 0 10px 0 0; width: 33%">
+                                    <select id="Hour" ng-model="current.Hour">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </td>
+                                <td style="padding: 0 10px 0 0; width: 33%">
+                                    <select id="Min" ng-model="current.Min">
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                        <option value="33">33</option>
+                                        <option value="34">34</option>
+                                        <option value="35">35</option>
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
+                                        <option value="38">38</option>
+                                        <option value="39">39</option>
+                                        <option value="40">40</option>
+                                        <option value="41">41</option>
+                                        <option value="42">42</option>
+                                        <option value="43">43</option>
+                                        <option value="44">44</option>
+                                        <option value="45">45</option>
+                                        <option value="46">46</option>
+                                        <option value="47">47</option>
+                                        <option value="48">48</option>
+                                        <option value="49">49</option>
+                                        <option value="50">50</option>
+                                        <option value="51">51</option>
+                                        <option value="52">52</option>
+                                        <option value="53">53</option>
+                                        <option value="54">54</option>
+                                        <option value="55">55</option>
+                                        <option value="56">56</option>
+                                        <option value="57">57</option>
+                                        <option value="58">58</option>
+                                        <option value="59">59</option>
+                                    </select>
+                                </td>
+                                <td style="padding: 0 0 0 0; width: 33%">
+                                    <select id="Time" ng-model="current.Time">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Bank" ng-bind="lang.BANK"></label>
+                    </th>
+                    <td>
+                        <select name="Bank" id="Bank" ng-model="current.Bank" ng-options="o.value as o.name for o in banks" required></select>
+                    </td>
+                </tr>
+                <tr ng-show="!isPhoneGap">
+                    <th>
+                        <label for="Photo" ng-bind="lang.PHOTOS"></label>
+                    </th>
+                    <td>
+                        <input type="file" id="Photo" fileread="current.Photo" accept="image/*" autocomplete="off" />
+                        <!--<p ng-show="isIos()" class="icon-alert-2">&nbsp; {{lang.IOS}}</p>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div ng-show="!current.Photo" style="margin: 10px 10px 10px 10px; display: block; text-align: center; font-weight: 600;">
+                            <b ng-bind="lang.PHOTO"></b>
+                            <div style="margin: 10px 0 30px 0" ng-show="isPhoneGap">
+                                <a href="" ng-bind="lang.TAKE_PHOTO" ng-click="takePhoto()"></a> / <a href="" ng-bind="lang.PICK_PHOTO" ng-click="pickPhoto()"></a>
+                            </div>
+                        </div>
+
+                        <img ng-src="{{current.Photo}}" ng-click="showPhoto()" style="width: 100%; max-width: 380px" ng-show="current.Photo" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-all" ng-disabled="!myForm.$valid || isDisabled" ng-bind="lang.SUBMIT"></button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <form ng-show="step == 2">
+        <div class="warning" style="margin: 25px 10px 10px 10px">
+            <small class="icon-information-circled"></small>
+            <span ng-bind="lang.PAY_TO"></span>
+        </div>
+        <div class="data-list">
+            <div class="list-item" ng-repeat="model in options" ng-click="onSelectBank(model)">
+                <p ng-bind="model.Bank"></p>
+                <span style="color: #1a1a1a" ng-bind="model.AccountName"></span>
+                <span style="color: #1a1a1a" ng-bind="model.AccountNo"></span>
+                <div class="icon-android-arrow-forward"></div>
+            </div>
+        </div>
+        <div style="padding: 10px">
+            <button ng-click="goTo(1)" class="btn btn-all" style="margin: 10px auto" ng-bind="lang.ORDER_NOW"></button>
+        </div>
+    </form>
+</div>
+
+<div id="menu">
+    <button ng-click="goTo(0)" ng-class="{'active': step == 0}" ng-bind="lang.RULE0"></button>
+    <button ng-click="goTo(2)" ng-class="{'active': step == 2}" ng-bind="lang.BANK_IN_OPTIONS"></button>
+    <button ng-click="goTo(1)" ng-class="{'active': step == 1}" ng-bind="lang.ORDER"></button>
+</div>
+
+
+<detail-pane visible='paneShown'>
+    <img ng-src="{{current.Photo}}" style="width: 100%; max-width: 380px"   id="currentPhoto" /> 
+</detail-pane>
+
+
+<div id="ddmenu">
+    <button ng-click="takePhoto()">
+        <i class="icon-camera-front"></i>
+        <span ng-bind="lang.TAKE_PHOTO"></span>
+    </button>
+
+    <button ng-click="pickPhoto()">
+        <i class="icon-photo-1"></i>
+        <span ng-bind="lang.PICK_PHOTO"></span>
+    </button>
+</div>
+
+
+
+<modal-dialog visible='modalShown'>
+    <p ng-bind="modalBody"></p>
+</modal-dialog>
+
+
+
+<!--<div id="lightbox" ng-show="showLightbox">
+    <div>
+        <img ng-src="{{current.Photo}}" />
+    </div>
+</div>
+
+<div id="overlay" ng-show="showLightbox">
+    <a href="" class="close icon-cross" ng-click="showLightbox = false"></a>
+</div>-->
